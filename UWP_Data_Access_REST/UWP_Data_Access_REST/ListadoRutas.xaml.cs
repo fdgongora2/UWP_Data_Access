@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWP_Data_Access_REST.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,21 @@ namespace UWP_Data_Access_REST
     /// </summary>
     public sealed partial class ListadoRutas : Page
     {
+        private RutasBus rutasBusesBarcelona;
+        private List<Tmb> listadoRutasBus;
         public ListadoRutas()
         {
             this.InitializeComponent();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            rutasBusesBarcelona = await GestorRutas.GetAllBusRoutesAsync();
+            listadoRutasBus = rutasBusesBarcelona.data.tmbs;
+            Lv_estaciones.ItemsSource = listadoRutasBus;
+
+
         }
     }
 }
