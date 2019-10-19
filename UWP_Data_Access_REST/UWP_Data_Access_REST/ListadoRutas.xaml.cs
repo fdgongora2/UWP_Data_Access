@@ -35,6 +35,7 @@ namespace UWP_Data_Access_REST
 
             rutasBusesBarcelona = await GestorRutas.GetAllBusRoutesAsync();
             listadoRutasBus = rutasBusesBarcelona.data.tmbs;
+            listadoRutasBus.Sort((p, q) => p.street_name.CompareTo(q.street_name));
             Lv_estaciones.ItemsSource = listadoRutasBus;
 
 

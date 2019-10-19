@@ -11,15 +11,35 @@
     Loaded="Page_Loaded">
 
     <Grid >
-        
-        
-        <ListView x:Name="Lv_estaciones">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <TextBlock>BARCELONA - Paradas de Bus</TextBlock>
+        <ListView x:Name="Lv_estaciones" Grid.Row="1">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Tmb">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind street_name}"></TextBlock>
-                        
-                    </StackPanel>
+                    <Grid HorizontalAlignment="Stretch" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*" ></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind street_name}"
+                                   Style="{StaticResource BodyTextBlockStyle}" 
+                                   FontWeight="Bold"
+                                   ></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{x:Bind buses}"
+                                   HorizontalAlignment="Right"
+                                   Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                    </Grid>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
