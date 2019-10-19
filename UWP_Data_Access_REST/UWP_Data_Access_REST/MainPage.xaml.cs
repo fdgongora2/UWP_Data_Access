@@ -26,5 +26,20 @@ namespace UWP_Data_Access_REST
         {
             this.InitializeComponent();
         }
+
+        private void Menu_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected == true)
+            {
+                
+            }
+            else if (args.SelectedItemContainer != null)
+            {
+                string navItemTag = args.SelectedItemContainer.Tag.ToString();
+                contentFrame.Navigate(Type.GetType(this.GetType().Namespace + "." + navItemTag));
+            }
+        }
+
+
     }
 }
