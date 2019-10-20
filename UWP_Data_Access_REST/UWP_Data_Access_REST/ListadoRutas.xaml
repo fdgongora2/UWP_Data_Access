@@ -10,19 +10,78 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
 
-    <Grid >
+    <Grid  >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-
         </Grid.RowDefinitions>
-        <TextBlock>BARCELONA - Paradas de Bus</TextBlock>
+
+        <Grid Padding="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+
+            <CommandBar Grid.Column="1"
+                x:Name="mainCommandBar"
+                HorizontalAlignment="Stretch"
+                Background="Transparent"
+             
+                RelativePanel.LeftOf="CustomerSearchBox"
+                RelativePanel.RightOf="PageTitle">
+                <AppBarButton
+                    Icon="Contact"
+                   
+                    Label="View details"
+                    ToolTipService.ToolTip="View details" />
+                <AppBarButton
+                    Icon="Shop"
+                  
+                    Label="Add order"
+                    ToolTipService.ToolTip="Add order" />
+                <AppBarSeparator />
+                
+                <AppBarButton
+                    Icon="Add"
+                    Label="New"
+                    ToolTipService.ToolTip="New customer" />
+                <AppBarButton
+                  
+                    Icon="Refresh"
+                    Label="Sync"
+                    ToolTipService.ToolTip="Sync with server" />
+                <CommandBar.Content>
+                    <TextBox x:Name="tb_buscarCalle" PlaceholderText="Buscar calle" VerticalAlignment="Bottom"
+                             TextChanged="Tb_buscarCalle_TextChanged"
+                             ></TextBox>
+                </CommandBar.Content>
+            </CommandBar>
+            
+            <TextBlock>BARCELONA - BUS</TextBlock>
+            <Border BorderBrush="LightGray" BorderThickness="0,0,0,2" Grid.ColumnSpan="2" ></Border>
+        </Grid> 
+        
+        
+        <ProgressRing x:Name="LoadingIndicator" Grid.Row="1"  Width="120" Height="120"/>
+        
         <ListView x:Name="Lv_estaciones" Grid.Row="1">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </ListView.ItemContainerStyle>
+            <ListView.Header>
+                <Grid HorizontalAlignment="Stretch"  Padding="10,10,10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Calle - Parada " Padding="10,0,0,0"></TextBlock>
+                    <TextBlock Text="Líneas" Grid.Column="1" HorizontalAlignment="Right" Padding="0,0,10,0"></TextBlock>
+                    <Border BorderBrush="LightGray" BorderThickness="0,0,0,2" Grid.ColumnSpan="2" Padding="10,10,10,10"></Border>
+                </Grid>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Tmb">
                     <Grid HorizontalAlignment="Stretch" >

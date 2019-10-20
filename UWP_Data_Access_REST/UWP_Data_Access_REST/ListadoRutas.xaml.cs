@@ -33,11 +33,20 @@ namespace UWP_Data_Access_REST
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
 
+            // LoadingIndicator.Visibility = Visibility.Visible;
+            LoadingIndicator.IsActive = true;
+
             rutasBusesBarcelona = await GestorRutas.GetAllBusRoutesAsync();
             listadoRutasBus = rutasBusesBarcelona.data.tmbs;
             listadoRutasBus.Sort((p, q) => p.street_name.CompareTo(q.street_name));
             Lv_estaciones.ItemsSource = listadoRutasBus;
+            // LoadingIndicator.Visibility = Visibility.Collapsed;
+            LoadingIndicator.IsActive = false;
 
+        }
+
+        private void Tb_buscarCalle_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }
