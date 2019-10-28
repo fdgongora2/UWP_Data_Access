@@ -30,7 +30,8 @@ namespace UWP_Data_Access_SQLSERVER
         public MainPage()
         {
             this.InitializeComponent();
-            contentFrame.Navigate(typeof(Pedidos));
+            contentFrame.Navigate(typeof(Productos));
+            Menu.IsPaneOpen = false;
             
       
         }

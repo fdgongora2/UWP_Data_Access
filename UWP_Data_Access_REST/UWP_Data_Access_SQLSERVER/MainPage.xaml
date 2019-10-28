@@ -13,11 +13,11 @@
 
     <Grid Background="{ThemeResource SystemControlAcrylicWindowBrush}">
 
-        <NavigationView x:Name="Menu" Windows10version1809:PaneDisplayMode="LeftCompact"
+        <NavigationView x:Name="Menu" PaneDisplayMode="LeftCompact"
                        SelectionChanged="Menu_SelectionChanged" >
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Library" Content="Pedidos" Tag="Pedidos" />
-                <NavigationViewItem Icon="Account" Content="Menu Item2" Tag="Pedidos" />
+                <NavigationViewItem Icon="Library" Content="Productos" Tag="Productos" />
+                <NavigationViewItem Icon="Account" Content="Pedidos" Tag="Pedidos" />
                 <NavigationViewItem Icon="Download" Content="Menu Item4" Tag="Pedidos" />
             </NavigationView.MenuItems>
             <Frame x:Name="contentFrame"/>
