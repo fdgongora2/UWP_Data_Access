@@ -28,7 +28,8 @@ namespace UWP_Data_Access_SQLSERVER
         /// </summary>
         /// 
         private string connectionString =
-        @"Data Source=DESKTOP-D21RT13;Initial Catalog=NORTHWIND;Integrated Security=SSPI";
+            @"Data Source=DESKTOP-D21RT13;Initial Catalog=NORTHWIND;Integrated Security=SSPI";
+        ///@"Data Source=DESKTOP-D21RT13;Initial Catalog=NORTHWIND;Integrated Security=SSPI";
 
         // This is an example connection string for using SQL Server Authentication.
         // private string connectionString =

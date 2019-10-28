@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using UWP_Data_Access_SQLSERVER.Models;
+
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
 
@@ -29,52 +30,23 @@ namespace UWP_Data_Access_SQLSERVER
         public MainPage()
         {
             this.InitializeComponent();
-            InventoryList.ItemsSource = GetProducts((App.Current as App).ConnectionString);
+            contentFrame.Navigate(typeof(Pedidos));
+            
+      
         }
-  
 
-    public ObservableCollection<Product> GetProducts(string connectionString)
-    {
-        const string GetProductsQuery = "select ProductID, ProductName, QuantityPerUnit," +
-           " UnitPrice, UnitsInStock, Products.CategoryID " +
-           " from Products inner join Categories on Products.CategoryID = Categories.CategoryID " +
-           " where Discontinued = 0";
-
-        var products = new ObservableCollection<Product>();
-        try
+        private void Menu_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            if (args.IsSettingsSelected == true)
             {
-                conn.Open();
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    using (SqlCommand cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = GetProductsQuery;
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                var product = new Product();
-                                product.ProductID = reader.GetInt32(0);
-                                product.ProductName = reader.GetString(1);
-                                product.QuantityPerUnit = reader.GetString(2);
-                                product.UnitPrice = reader.GetDecimal(3);
-                                product.UnitsInStock = reader.GetInt16(4);
-                                product.CategoryId = reader.GetInt32(5);
-                                products.Add(product);
-                            }
-                        }
-                    }
-                }
+
             }
-            return products;
+            else if (args.SelectedItemContainer != null)
+            {
+                string navItemTag = args.SelectedItemContainer.Tag.ToString();
+                contentFrame.Navigate(Type.GetType(this.GetType().Namespace + "." + navItemTag));
+            }
         }
-        catch (Exception eSql)
-        {
-            Debug.WriteLine("Exception: " + eSql.Message);
-        }
-        return null;
-    }
+
     }
 }
