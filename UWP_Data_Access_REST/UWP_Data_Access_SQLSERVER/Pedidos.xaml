@@ -10,9 +10,34 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+
+            <AppBarButton x:Name="Alta_pedido" Icon="Add" Label="Pedido nuevo" Click="Alta_pedido_Click"/>           
+            <AppBarButton x:Name="Editar_pedido" Icon="Edit" Label="Modificar pedido" Click="Editar_pedido_Click" />
+            <AppBarButton x:Name="Borrar_pedido" Icon="Delete" Label="Borrar pedido" Click="Borrar_pedido_Click"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Setting" Label="Settings">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="S" />
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+            <CommandBar.Content>
+                <TextBlock Text="PEDIDOS" Style="{ThemeResource SubtitleTextBlockStyle}"></TextBlock>
+            </CommandBar.Content>
+        </CommandBar>
+        
         <controls:DataGrid x:Name="DG_Pedidos"
+                           Grid.Row="1"
                            AutoGenerateColumns="True"
+                           IsReadOnly="True"
+                           AlternatingRowBackground="#FFE6F0F1"
+                           SelectionChanged="DG_Pedidos_SelectionChanged" DoubleTapped="DG_Pedidos_DoubleTapped"
                            >
             
         </controls:DataGrid> 

@@ -20,7 +20,7 @@ namespace UWP_Data_Access_SQLSERVER.Models
         public string Empleado { get; set; }
 
 
-        public DateTime OrderDate { get; set; }
+        public DateTimeOffset OrderDate { get; set; }
 
      
         
@@ -37,7 +37,7 @@ namespace UWP_Data_Access_SQLSERVER.Models
         public static ObservableCollection<Pedido> GetPedidos(string connectionString)
         {
             const string GetProductsQuery =                
-               "SELECT o.OrderID, o.CustomerID, o.OrderDate, c.CompanyName, CONCAT(CONCAT(e.LastName,' ,') , e.FirstName)                                              " +               
+               "SELECT o.OrderID, o.CustomerID, o.OrderDate, c.CompanyName, CONCAT(CONCAT(e.LastName,' ,') , e.FirstName) , o.employeeID                                             " +               
                " FROM Orders o                                            " +
                "    LEFT JOIN Customers c on o.CustomerID = c.CustomerID " +
                "    LEFT JOIN Employees e on o.EmployeeID = e.EmployeeID " +
@@ -64,6 +64,8 @@ namespace UWP_Data_Access_SQLSERVER.Models
                                     pedido.OrderDate = reader.GetDateTime(2);
                                     pedido.Cliente = reader.GetString(3);
                                     pedido.Empleado = reader.GetString(4);
+                                    pedido.EmployeeID = reader.GetInt32(5);
+                                    
 
                                     pedidos.Add(pedido);
                                 }
@@ -80,6 +82,38 @@ namespace UWP_Data_Access_SQLSERVER.Models
             return null;
         }
 
+        public bool Guardar_Pedido()
+        {
+            string Consulta = " INSERT  INTO Orders( CustomerID, OrderDate, employeeID )    " +
+               " VALUES  ( '" + 
+               CustomerID.ToString() + "' , '" + OrderDate.ToString("d") + "' " +
+               ", " + EmployeeID.ToString() + " )";
+
+            var pedidos = new ObservableCollection<Pedido>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection((App.Current as App).ConnectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = Consulta;
+                            // EL valor devuelto corresponde con las filas afectadas por la sentencia
+                            return (cmd.ExecuteNonQuery() == 1);
+                            
+                        }
+                    }
+                }
+                
+            }
+            catch (Exception eSql)
+            {
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+            return false;
+        }
 
     }
 

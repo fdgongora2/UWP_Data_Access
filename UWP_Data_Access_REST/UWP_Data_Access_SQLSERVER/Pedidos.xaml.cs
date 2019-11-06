@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
@@ -28,6 +29,43 @@ namespace UWP_Data_Access_SQLSERVER
         {
             this.InitializeComponent();
             DG_Pedidos.ItemsSource = Pedido.GetPedidos((App.Current as App).ConnectionString);
+        }
+
+        private void DG_Pedidos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+           
+        }
+
+        private void DG_Pedidos_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+            DataGrid grid = sender as DataGrid;
+            if (grid.SelectedItem != null)
+            {
+
+                this.Frame.Navigate(typeof(EditarPedido), grid.SelectedItem);
+            }
+
+        }
+               
+        private void Editar_pedido_Click(object sender, RoutedEventArgs e)
+        {
+            if (DG_Pedidos.SelectedItem != null)
+            {
+                this.Frame.Navigate(typeof(EditarPedido), DG_Pedidos.SelectedItem);
+            }
+
+        }
+
+        private void Alta_pedido_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(EditarPedido));
+        }
+
+        private void Borrar_pedido_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
