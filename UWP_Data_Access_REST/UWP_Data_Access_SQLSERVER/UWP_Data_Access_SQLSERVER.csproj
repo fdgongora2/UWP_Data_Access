@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Utiles.cs" />
     <Compile Include="Pedidos.xaml.cs">
       <DependentUpon>Pedidos.xaml</DependentUpon>
     </Compile>

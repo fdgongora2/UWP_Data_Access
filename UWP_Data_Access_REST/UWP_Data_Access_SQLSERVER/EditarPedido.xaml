@@ -96,7 +96,7 @@
         <DatePicker x:Name="Fecha"
             Grid.Row="6"
                  Grid.Column="3"            
-                 Date="{x:Bind pedido_editandose.OrderDate , Mode=TwoWay}"                 
+                                
                  ></DatePicker>
 
         <StackPanel Orientation="Horizontal" 
@@ -114,6 +114,6 @@
                                     AnimationDuration="00:00:00.1000000"
                                     VerticalOffset="100"
                                     HorizontalOffset="0"
-                                    StackMode="Replace" />
+                                    StackMode="StackInFront" />
     </Grid>
 </Page>
