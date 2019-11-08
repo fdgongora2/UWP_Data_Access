@@ -65,6 +65,14 @@ namespace UWP_Data_Access_SQLSERVER
 
         private void Borrar_pedido_Click(object sender, RoutedEventArgs e)
         {
+            if (DG_Pedidos.SelectedItem != null)
+            {
+               if ((DG_Pedidos.SelectedItem as Pedido).Borrar_Pedido())
+                {
+                    DG_Pedidos.ItemsSource = Pedido.GetPedidos((App.Current as App).ConnectionString);
+                }
+
+            }
 
         }
     }

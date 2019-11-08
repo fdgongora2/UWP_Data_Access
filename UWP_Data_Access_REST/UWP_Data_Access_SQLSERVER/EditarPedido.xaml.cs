@@ -62,7 +62,7 @@ namespace UWP_Data_Access_SQLSERVER
                 pedido_editandose.RequiredDate = DateTime.Now;
                 pedido_editandose.ShippedDate = DateTime.Now;
 
-                if (pedido_editandose.Alta_Pedido())
+                if (pedido_editandose.Alta_Pedido() > 0)
                 {
                     int duration = 2000;
                     ExampleInAppNotification.Show("Pedido dado de alta correctamente.", duration);
