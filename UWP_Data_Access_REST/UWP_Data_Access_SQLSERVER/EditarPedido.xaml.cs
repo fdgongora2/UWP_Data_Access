@@ -65,7 +65,7 @@ namespace UWP_Data_Access_SQLSERVER
                 if (pedido_editandose.Alta_Pedido() > 0)
                 {
                     int duration = 2000;
-                    ExampleInAppNotification.Show("Pedido dado de alta correctamente.", duration);
+                   // ExampleInAppNotification.Show("Pedido dado de alta correctamente.", duration);
                     this.Frame.Navigate(typeof(Pedidos));
                    
                 }
@@ -74,6 +74,7 @@ namespace UWP_Data_Access_SQLSERVER
             else
             {
                 // EDICIÓN
+                pedido_editandose.Actualizar_Pedido_SinConcurrencia();
             }
         }
 

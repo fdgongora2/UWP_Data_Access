@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UWP_Data_Access_SQLSERVER"
+    xmlns:utiles="using:UWP_Data_Access_SQLSERVER.Models" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -17,8 +18,47 @@
                
     </Page.Resources>-->
 
+    <Page.Resources>
+
+        <utiles:DatetimeFormatter x:Key="DatetimeFormatterValueConverter"/>
+    </Page.Resources>
+
     <Grid >
-        <Grid.ColumnDefinitions>
+        <ScrollViewer>
+        <StackPanel Orientation="Vertical" Margin="10 24 24 0" HorizontalAlignment="Stretch" >
+            <TextBlock x:Name="Cabecera"  Text="Edición de pedidos" Margin ="10 24 0 0" ></TextBlock>
+            <TextBox Header="Pedido" Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.OrderID}" HorizontalAlignment="Left" ></TextBox>
+            <StackPanel Orientation="Horizontal"  >
+              <TextBox Header="ID Cliente" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.CustomerID}" Width="150" ></TextBox>
+              <TextBox Header="Cliente" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.Cliente}" Width="400"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  >
+                <TextBox Header="ID Empleado" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.EmployeeID}" Width="150"></TextBox>
+                <TextBox Header="Empleado" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.Empleado}" Width="400"></TextBox>
+            </StackPanel>
+
+                <DatePicker Header="Fecha del pedido" Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.OrderDate , Converter={StaticResource DatetimeFormatterValueConverter}}"></DatePicker>
+                <DatePicker Header="Fecha de entrega" Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.RequiredDate, Converter={StaticResource DatetimeFormatterValueConverter}}"></DatePicker>
+                <DatePicker Header="Fecha de salida de almacén" Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.ShippedDate, Converter={StaticResource DatetimeFormatterValueConverter}}"></DatePicker>
+
+            <StackPanel Orientation="Horizontal"  >
+                <TextBox Header="ID transporte" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.ShipVia}" Width="150"></TextBox>
+                <TextBox Header="Medio de transporte" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.Empleado}" Width="400"></TextBox>
+            </StackPanel>
+
+            <TextBox Header="Coste del transporte" Margin ="10 48 0 0" Width="200" Text="{x:Bind pedido_editandose.Freight}" InputScope="Number" HorizontalAlignment="Left" ></TextBox>
+            <TextBox Header="Entregar a " Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.ShipName}"  HorizontalAlignment="Left" ></TextBox>
+            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="650" Text="{x:Bind pedido_editandose.ShipAddress}"  HorizontalAlignment="Left" ></TextBox>
+            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="400" Text="{x:Bind pedido_editandose.ShipCity}"  HorizontalAlignment="Left" ></TextBox>
+            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="400" Text="{x:Bind pedido_editandose.ShipRegion}"  HorizontalAlignment="Left" ></TextBox>
+            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.ShipPostalCode}"  HorizontalAlignment="Left" ></TextBox>
+            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="300" Text="{x:Bind pedido_editandose.ShipCountry}"  HorizontalAlignment="Left" ></TextBox>
+            
+
+        </StackPanel>
+
+        </ScrollViewer>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="10px"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="10px"></ColumnDefinition>
@@ -114,6 +154,6 @@
                                     AnimationDuration="00:00:00.1000000"
                                     VerticalOffset="100"
                                     HorizontalOffset="0"
-                                    StackMode="StackInFront" />
+                                    StackMode="StackInFront" />-->
     </Grid>
 </Page>

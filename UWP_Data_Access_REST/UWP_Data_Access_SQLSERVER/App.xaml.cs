@@ -27,7 +27,7 @@ namespace UWP_Data_Access_SQLSERVER
         /// ejecutado y, como tal, es el equivalente lógico de main() o WinMain().
         /// </summary>
         /// 
-        private string connectionString =   @"Data Source=1C1B0D57A991\SQLEXPRESS;Initial Catalog=NORTHWIND;Integrated Security=SSPI";
+        private string connectionString = @"Data Source=DESKTOP-7JE5Q1S\SQLEXPRESS;Initial Catalog=NORTHWIND;Integrated Security=SSPI";
         //@"Data Source=DESKTOP-D21RT13;Initial Catalog=NORTHWIND;Integrated Security=SSPI";
 
 
