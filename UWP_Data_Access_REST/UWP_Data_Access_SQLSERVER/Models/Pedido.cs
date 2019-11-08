@@ -50,7 +50,7 @@ namespace UWP_Data_Access_SQLSERVER.Models
         }
 
 
-        public static ObservableCollection<Pedido> GetPedidos(string connectionString)
+        public static ObservableCollection<Pedido> GetPedidos()
         {
             const string GetProductsQuery =
                "SELECT o.*, c.CompanyName , CONCAT(CONCAT(e.LastName,' ,') , e.FirstName) as Empleado, s.CompanyName as ShipCompany                                              " +
@@ -63,7 +63,7 @@ namespace UWP_Data_Access_SQLSERVER.Models
             var pedidos = new ObservableCollection<Pedido>();
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection((App.Current as App).ConnectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)

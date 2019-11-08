@@ -19,44 +19,84 @@
     </Page.Resources>-->
 
     <Page.Resources>
+        <utiles:DateTimeConverter x:Key="DatetimeFormatterValueConverter"/>
+        <utiles:DecimalConverter x:Key="DecimalValueConverter"/>
 
-        <utiles:DatetimeFormatter x:Key="DatetimeFormatterValueConverter"/>
+        <Style TargetType="TextBox">           
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding}" Foreground="#FF4096DA" SelectionHighlightColor="#FF4096DA" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="CalendarDatePicker">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding}" Foreground="#FF4096DA" SelectionHighlightColor="#FF4096DA" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> 
     </Page.Resources>
 
     <Grid >
         <ScrollViewer>
-        <StackPanel Orientation="Vertical" Margin="10 24 24 0" HorizontalAlignment="Stretch" >
+        <StackPanel Orientation="Vertical"  HorizontalAlignment="Stretch" >            
             <TextBlock x:Name="Cabecera"  Text="Edición de pedidos" Margin ="10 24 0 0" ></TextBlock>
-            <TextBox Header="Pedido" Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.OrderID}" HorizontalAlignment="Left" ></TextBox>
+                <TextBox Header="Pedido"  Margin="10 24 24 0" Width="200" Text="{x:Bind pedido_editandose.OrderID}" IsReadOnly="True" HorizontalAlignment="Left" ></TextBox>
             <StackPanel Orientation="Horizontal"  >
-              <TextBox Header="ID Cliente" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.CustomerID}" Width="150" ></TextBox>
-              <TextBox Header="Cliente" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.Cliente}" Width="400"></TextBox>
+                    <TextBox Header="ID Cliente" Margin="10 24 24 0" Text="{x:Bind pedido_editandose.CustomerID, Mode=TwoWay}"
+                             MaxLength="4" Width="150" ></TextBox>
+                    <AutoSuggestBox x:Name="Buscador_clientes" Header="Cliente"  Margin="10 24 24 0" Text="{x:Bind pedido_editandose.Cliente}" Width="400">
+                        <AutoSuggestBox.ItemTemplate>
+                            <DataTemplate >
+                                
+                            </DataTemplate>
+
+                        </AutoSuggestBox.ItemTemplate>
+                    </AutoSuggestBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  >
-                <TextBox Header="ID Empleado" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.EmployeeID}" Width="150"></TextBox>
-                <TextBox Header="Empleado" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.Empleado}" Width="400"></TextBox>
+                    <TextBox Header="ID Empleado" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.EmployeeID, Mode=TwoWay}" Width="150"></TextBox>
+                    <TextBox Header="Empleado" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.Empleado}" Width="400"></TextBox>
             </StackPanel>
 
-                <DatePicker Header="Fecha del pedido" Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.OrderDate , Converter={StaticResource DatetimeFormatterValueConverter}}"></DatePicker>
-                <DatePicker Header="Fecha de entrega" Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.RequiredDate, Converter={StaticResource DatetimeFormatterValueConverter}}"></DatePicker>
-                <DatePicker Header="Fecha de salida de almacén" Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.ShippedDate, Converter={StaticResource DatetimeFormatterValueConverter}}"></DatePicker>
+                <CalendarDatePicker Header="Fecha del pedido  " Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.OrderDate , Converter={StaticResource DatetimeFormatterValueConverter}, Mode=TwoWay}"></CalendarDatePicker>
+                <CalendarDatePicker Header="Fecha de entrega"    Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.RequiredDate, Converter={StaticResource DatetimeFormatterValueConverter}, Mode=TwoWay}"></CalendarDatePicker>
+                <CalendarDatePicker Header="Fecha salida de almacén" Margin ="10 24 0 0" Date="{x:Bind pedido_editandose.ShippedDate, Converter={StaticResource DatetimeFormatterValueConverter}, Mode=TwoWay}"></CalendarDatePicker>
 
             <StackPanel Orientation="Horizontal"  >
-                <TextBox Header="ID transporte" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.ShipVia}" Width="150"></TextBox>
-                <TextBox Header="Medio de transporte" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.Empleado}" Width="400"></TextBox>
+                    <TextBox Header="ID transporte" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.ShipVia, Mode=TwoWay}" Width="150"></TextBox>
+                    <TextBox Header="Medio de transporte" Margin ="10 24 0 0" Text="{x:Bind pedido_editandose.CompaniaTransporte}" Width="400"></TextBox>
             </StackPanel>
 
-            <TextBox Header="Coste del transporte" Margin ="10 48 0 0" Width="200" Text="{x:Bind pedido_editandose.Freight}" InputScope="Number" HorizontalAlignment="Left" ></TextBox>
-            <TextBox Header="Entregar a " Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.ShipName}"  HorizontalAlignment="Left" ></TextBox>
-            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="650" Text="{x:Bind pedido_editandose.ShipAddress}"  HorizontalAlignment="Left" ></TextBox>
-            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="400" Text="{x:Bind pedido_editandose.ShipCity}"  HorizontalAlignment="Left" ></TextBox>
-            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="400" Text="{x:Bind pedido_editandose.ShipRegion}"  HorizontalAlignment="Left" ></TextBox>
-            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.ShipPostalCode}"  HorizontalAlignment="Left" ></TextBox>
-            <TextBox Header="Dirección " Margin ="10 24 0 0" Width="300" Text="{x:Bind pedido_editandose.ShipCountry}"  HorizontalAlignment="Left" ></TextBox>
-            
+            <TextBox Header="Coste del transporte" Margin ="10 48 0 0" Width="200" 
+                     Text="{x:Bind pedido_editandose.Freight,Converter={StaticResource DecimalValueConverter}, Mode=TwoWay}" 
+                     InputScope="Number" HorizontalAlignment="Left" 
+                     TextAlignment="Right"></TextBox>
+                <TextBox Header="Entregar a " Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.ShipName , Mode=TwoWay}"  HorizontalAlignment="Left" ></TextBox>
+                <TextBox Header="Dirección" Margin ="10 24 0 0" Width="650" Text="{x:Bind pedido_editandose.ShipAddress , Mode=TwoWay}"  HorizontalAlignment="Left" ></TextBox>
+                <TextBox Header="Ciudad" Margin ="10 24 0 0" Width="400" Text="{x:Bind pedido_editandose.ShipCity , Mode=TwoWay}"  HorizontalAlignment="Left" ></TextBox>
+                <TextBox Header="Región" Margin ="10 24 0 0" Width="400" Text="{x:Bind pedido_editandose.ShipRegion , Mode=TwoWay}"  HorizontalAlignment="Left" ></TextBox>
+                <TextBox Header="CP" Margin ="10 24 0 0" Width="200" Text="{x:Bind pedido_editandose.ShipPostalCode , Mode=TwoWay}"  HorizontalAlignment="Left" ></TextBox>
+                <TextBox Header="País" Margin ="10 24 0 0" Width="300" Text="{x:Bind pedido_editandose.ShipCountry , Mode=TwoWay}"  HorizontalAlignment="Left" ></TextBox>
 
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <Button x:Name="Guardar" Click="Guardar_Click" 
+                            Width="250">Guardar</Button>
+                    <Button x:Name="Cancelar" Click="Cancelar_Click" 
+                            Width="250">Cancelar</Button>
+                </StackPanel>
         </StackPanel>
 
+            
         </ScrollViewer>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="10px"></ColumnDefinition>

@@ -28,7 +28,7 @@ namespace UWP_Data_Access_SQLSERVER
         public Pedidos()
         {
             this.InitializeComponent();
-            DG_Pedidos.ItemsSource = Pedido.GetPedidos((App.Current as App).ConnectionString);
+            DG_Pedidos.ItemsSource = Pedido.GetPedidos();
         }
 
         private void DG_Pedidos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,7 +69,7 @@ namespace UWP_Data_Access_SQLSERVER
             {
                if ((DG_Pedidos.SelectedItem as Pedido).Borrar_Pedido())
                 {
-                    DG_Pedidos.ItemsSource = Pedido.GetPedidos((App.Current as App).ConnectionString);
+                    DG_Pedidos.ItemsSource = Pedido.GetPedidos();
                 }
 
             }

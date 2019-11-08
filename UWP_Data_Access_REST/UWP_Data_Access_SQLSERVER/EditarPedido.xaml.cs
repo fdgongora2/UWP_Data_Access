@@ -75,6 +75,7 @@ namespace UWP_Data_Access_SQLSERVER
             {
                 // EDICIÓN
                 pedido_editandose.Actualizar_Pedido_SinConcurrencia();
+                this.Frame.Navigate(typeof(Pedidos));
             }
         }
 
