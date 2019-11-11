@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UWP_Data_Access_SQLSERVER.Models;
@@ -16,38 +17,260 @@ namespace UWP_Data_Access_SQLSERVER.Models
     public class Pedido : INotifyPropertyChanged
     {
 
-        public int OrderID { get; set; }
-        public string CustomerID { get; set; }
-        public int EmployeeID { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime RequiredDate { get; set; }
-        public DateTime ShippedDate { get; set; }
-        public int ShipVia { get; set; }
-        public decimal Freight { get; set; }
-        public string ShipName { get; set; }
-        public string ShipAddress { get; set; }
-        public string ShipCity { get; set; }
-        public string ShipRegion { get; set; }
-        public string ShipPostalCode { get; set; }
-        public string ShipCountry { get; set; }
+        private int _OrderID;
+        public int OrderID { get { return _OrderID; }
+            
+            set
+            {
+                if (value != _OrderID)
+                {
+                    _OrderID = value;
+                    NotifyPropertyChanged();
+                }
+            } }
+
+        private string _CustomerID;
+        public string CustomerID {
+            get { return this._CustomerID; }
+
+            set
+            {
+                if (value != this._CustomerID)
+                {
+                    this._CustomerID = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _EmployeeID;
+        public int EmployeeID
+        {
+            get { return this._EmployeeID; }
+
+            set
+            {
+                if (value != this._EmployeeID)
+                {
+                    this._EmployeeID = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private DateTime _OrderDate;
+        public DateTime OrderDate
+        {
+            get { return this._OrderDate; }
+
+            set
+            {
+                if (value != this._OrderDate)
+                {
+                    this._OrderDate = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private DateTime _RequiredDate;
+        public DateTime RequiredDate
+        {
+            get { return this._RequiredDate; }
+
+            set
+            {
+                if (value != this._RequiredDate)
+                {
+                    this._RequiredDate = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private DateTime _ShippedDate;
+        public DateTime ShippedDate
+        {
+            get { return this._ShippedDate; }
+
+            set
+            {
+                if (value != this._ShippedDate)
+                {
+                    this._ShippedDate = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _ShipVia;
+        public int ShipVia
+        {
+            get { return this._ShipVia; }
+
+            set
+            {
+                if (value != this._ShipVia)
+                {
+                    this._ShipVia = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private decimal _Freight;
+        public decimal Freight
+        {
+            get { return this._Freight; }
+
+            set
+            {
+                if (value != this._Freight)
+                {
+                    this._Freight = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _ShipName;
+        public string ShipName
+        {
+            get { return this._ShipName; }
+
+            set
+            {
+                if (value != this._ShipName)
+                {
+                    this._ShipName = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _ShipAddress;
+        public string ShipAddress
+        {
+            get { return this._ShipAddress; }
+
+            set
+            {
+                if (value != this._ShipAddress)
+                {
+                    this._ShipAddress = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _ShipCity;
+        public string ShipCity
+        {
+            get { return this._ShipCity; }
+
+            set
+            {
+                if (value != this._ShipCity)
+                {
+                    this._ShipCity = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _ShipRegion;
+        public string ShipRegion
+        {
+            get { return this._ShipRegion; }
+
+            set
+            {
+                if (value != this._ShipRegion)
+                {
+                    this._ShipRegion = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private string _ShipPostalCode;
+        public string ShipPostalCode
+        {
+            get { return this._ShipPostalCode; }
+
+            set
+            {
+                if (value != this._ShipPostalCode)
+                {
+                    this._ShipPostalCode = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _ShipCountry;
+        public string ShipCountry
+        {
+            get { return this._ShipCountry; }
+
+            set
+            {
+                if (value != this._ShipCountry)
+                {
+                    this._ShipCountry = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
 
         // Valores calculados obtenidos en la consulta para visualizarlos en el Datagrid 
         // No se consideran valores válidos
-        public string Cliente { get; set; }
-        public string Empleado { get; set; }
-        public string CompaniaTransporte { get; set; }
+        private string _Cliente;
+        public string Cliente
+        {
+            get { return this._Cliente; }
+
+            set
+            {
+                if (value != this._Cliente)
+                {
+                    this._Cliente = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _Empleado;
+        public string Empleado
+        {
+            get { return this._Empleado; }
+
+            set
+            {
+                if (value != this._Empleado)
+                {
+                    this._Empleado = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _CompaniaTransporte;
+        public string CompaniaTransporte
+        {
+            get { return this._CompaniaTransporte; }
+
+            set
+            {
+                if (value != this._CompaniaTransporte)
+                {
+                    _CompaniaTransporte = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
 
 
         public static ObservableCollection<Pedido> GetPedidos()

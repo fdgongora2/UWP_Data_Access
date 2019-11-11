@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,10 +26,14 @@ namespace UWP_Data_Access_SQLSERVER
     {
 
         private Pedido pedido_editandose;
+        private Cliente cliente_actual ;
+        private ObservableCollection<Cliente> ClientesBuscados;
         
         public EditarPedido()
         {
             this.InitializeComponent();
+            // ClientesBuscados = Cliente.GetClientes("a");
+            Buscador_clientes.ItemsSource = ClientesBuscados;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -37,6 +42,7 @@ namespace UWP_Data_Access_SQLSERVER
             { 
                 // Edición
                 pedido_editandose = e.Parameter as Pedido;
+                cliente_actual = Cliente.GetClienteCONID(pedido_editandose.CustomerID);
             }
             else
             { 
@@ -82,6 +88,35 @@ namespace UWP_Data_Access_SQLSERVER
         private void Cancelar_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private  void Buscador_clientes_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                    if (args.CheckCurrent())
+                    {
+                        ClientesBuscados = String.IsNullOrEmpty(sender.Text) ? null : Cliente.GetClientes(sender.Text);
+                        Buscador_clientes.ItemsSource = null;
+                    Buscador_clientes.ItemsSource = ClientesBuscados;
+
+                    }
+                
+            }
+        }
+
+        private void Buscador_clientes_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+
+            pedido_editandose.CustomerID =((Cliente) args.SelectedItem).CustomerID;
+            pedido_editandose.ShipAddress = ((Cliente)args.SelectedItem).Address;
+            pedido_editandose.ShipCity = ((Cliente)args.SelectedItem).City;
+            pedido_editandose.ShipRegion = ((Cliente)args.SelectedItem).Region;
+            pedido_editandose.ShipCountry = ((Cliente)args.SelectedItem).Country;
+            pedido_editandose.ShipPostalCode = ((Cliente)args.SelectedItem).PostalCode;
+
+            
+           
         }
     }
 }
